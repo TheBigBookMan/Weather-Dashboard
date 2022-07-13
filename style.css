@@ -1,0 +1,105 @@
+:root {
+    --primary-color: rgb(82, 82, 199);
+    --secondary-color: rgb(104, 186, 213);
+}
+
+/* Header*/
+#header-bar h1 {
+    color: #fff;
+    background: linear-gradient(to left, var(--primary-color), var(--secondary-color));
+    padding: 20px;
+    text-align: center;
+    margin-top: -2px;
+    margin-bottom: 3px;
+}
+
+/* Main section container*/
+main {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: black 2px solid;
+}
+
+/* Aside section*/
+.aside-container {
+    border: black solid 2px;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.search-container {
+    border: solid red 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    
+}
+
+#search-city {
+    border-radius: 3px;
+    width: 50%;
+    padding: 5px;
+}
+
+.search-container h3 {
+    margin-top: 2px;
+    margin-bottom: 3px;
+}
+
+#submit-btn {
+    margin-top: 5px;
+    width: 100%;
+    height: 40px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    font-weight: bolder;
+    border: solid var(--primary-color) 1px;
+    border-radius: 5px;
+}
+
+#submit-btn:active {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.search-history {
+    border: solid yellow 2px;
+    height: 100%;
+}
+
+/* Results section*/
+/* Result for current day*/
+.results-container {
+    border: black solid 2px;
+    width: 75%;
+}
+
+.search-result-day {
+    border: blue solid 2px;
+    height: 35%;
+}
+
+.result-info {
+    border: solid red 2px;
+}
+
+/* Result for future */
+.search-result-future {
+    border: solid yellow 2px;
+    height: 65%;
+}
+
+.future-day-cards {
+    border: solid green 2px;
+}
+
+/*INPUT THE STYLE AND WHATNOT FOR EACH CLASS WHEN IT GETS MADE THROUGH THE JAVASCRIPT*/
+.future-card {
+    display: flex;
+    justify-content: space-around;
+    color: #fff;
+    background: var(--primary-color);
+}
