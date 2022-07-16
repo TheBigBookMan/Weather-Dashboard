@@ -31,7 +31,14 @@
 
         <section class="results-container">
             <div class="search-result-day">
-                <div class="result-info"></div>
+                <div class="result-info">
+                    <div class="result-city-heads">
+                        <span id="result-city-title"></span>
+                        <span id="result-city-date"></span>
+                        <span id="result-city-icon"></span>
+                    </div>
+                </div>
+                <ul class="result-city-info-list"></ul>
             </div>
             <div class="search-result-future">
                 <h4>5-Day Forecast:</h4>
@@ -42,7 +49,7 @@
         </section>
     </main>
     
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script type="text/javascript" src="./app.js"></script>
 </body>
 </html>

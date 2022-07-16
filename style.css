@@ -17,7 +17,7 @@
 main {
     display: flex;
     width: 100%;
-    height: 100%;
+    /* height: 100%; */
     border: black 2px solid;
 }
 
@@ -95,22 +95,54 @@ main {
 /* Result for current day*/
 .results-container {
     border: black solid 2px;
+    display: flex;
+    flex-direction: column;
     width: 75%;
 }
 
 .search-result-day {
     border: blue solid 2px;
-    height: 35%;
+    /* height: 35%; */
 }
 
 .result-info {
     border: solid red 2px;
 }
 
+.result-city-heads {
+    font-weight: bolder;
+    font-size: 1.2rem;
+    
+}
+
+.result-city-info-list {
+    list-style: none;
+}
+
+.result-city-info-list li {
+    margin-bottom: 20px;
+    font-style: italic;
+}
+
+.color-code-red {
+    background: red;
+}
+
+.color-code-orange {
+    background: orange;
+}
+
+.color-code-green {
+    background: green;
+    color: white;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
 /* Result for future */
 .search-result-future {
     border: solid yellow 2px;
-    height: 65%;
+    position: relative;
 }
 
 .future-day-cards {
