@@ -17,13 +17,10 @@
 main {
     display: flex;
     width: 100%;
-    /* height: 100%; */
-    border: black 2px solid;
 }
 
 /* Aside section*/
 .aside-container {
-    border: black solid 2px;
     width: 25%;
     height: 100%;
     display: flex;
@@ -31,7 +28,6 @@ main {
 }
 
 .search-container {
-    border: solid red 2px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -67,7 +63,6 @@ main {
 }
 
 .search-history {
-    border: solid yellow 2px;
     height: 100%;    
 }
 
@@ -91,28 +86,28 @@ main {
     margin-bottom: 10px;
 }
 
+.search-history-item:active {
+    background: var(--secondary-color);
+    transition: all 0s;
+}
+
 /* Results section*/
 /* Result for current day*/
 .results-container {
-    border: black solid 2px;
+    margin-left: 5px;
     display: flex;
     flex-direction: column;
     width: 75%;
 }
 
-.search-result-day {
-    border: blue solid 2px;
-    /* height: 35%; */
-}
-
-.result-info {
-    border: solid red 2px;
-}
-
 .result-city-heads {
     font-weight: bolder;
     font-size: 1.2rem;
-    
+}
+
+.icon-img {
+    height: 50px;
+    width: 50px;
 }
 
 .result-city-info-list {
@@ -141,12 +136,10 @@ main {
 
 /* Result for future */
 .search-result-future {
-    border: solid yellow 2px;
     position: relative;
 }
 
 .future-day-cards {
-    border: solid green 2px;
     display: flex;
     justify-content: space-around;
 }
@@ -159,6 +152,6 @@ main {
     width: 200px;
     color: #fff;
     background: var(--primary-color);
-    border: purple solid 3px;
+    border: black solid 3px;
     border-radius: 5px;
 }

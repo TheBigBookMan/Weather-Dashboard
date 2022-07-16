@@ -9,6 +9,7 @@ var newLi;
 var newLiButton;
 var urlGeoCode;
 var urlWeather;
+var urlIcon;
 
 // Result section
 var resultContainer = document.querySelector('.result-container')
@@ -59,6 +60,7 @@ const init = () => {
             newLiButton.className = "search-history-item"
             historyList.appendChild(newLi);
             newLiButton.textContent = savedLocalCities[i]
+            createBtnEvent(savedLocalCities[i])
         };
     }
     
@@ -68,7 +70,6 @@ const init = () => {
 const createBtnEvent = (input) => {
     newLiButton.addEventListener('click', event => {
         event.preventDefault()
-        console.log(input)
         urlGeoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=3&appid=d9b9bc1832593b46ab69e998211f9b08`;
         getApiLatLon(input)
     })
@@ -119,7 +120,6 @@ const getApiWeather = (lat, lon, input) => {
     urlWeather = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=cb187059a60a4d1624b2d6be95ebcdf1`
     fetch(urlWeather)
         .then(function(response) {
-            console.log(response)
             return response.json();
         })
         .then(function(data) {
@@ -127,7 +127,8 @@ const getApiWeather = (lat, lon, input) => {
             var currentWind = data.current.wind_speed
             var currentHumidity = data.current.humidity
             var currentUvi = data.current.uvi
-            currentDayResult(currentTemp, currentWind, currentHumidity, currentUvi, input)
+            var currentIcon = data.current.weather[0].icon
+            currentDayResult(currentTemp, currentWind, currentHumidity, currentUvi, input, currentIcon)
             createFiveDayResults(data)
         })
         return;
@@ -138,12 +139,17 @@ var resultListWind = document.createElement('li')
 var resultListHumidity = document.createElement('li')
 var resultListUvi = document.createElement('li')
 var resultListUviNum = document.createElement('span')
+var resultListIcon = document.createElement('img')
 
 // FUNCTION THAT RETREIVES THE API SEARCH INTO THE MAIN SECTION
-const currentDayResult = (temp, wind, humidity, uvi, input) => {
+const currentDayResult = (temp, wind, humidity, uvi, input, icon) => {
     resultTitle.textContent = input + "-"
     dateTime = moment();
     resultDate.textContent = dateTime.format("dddd, MMMM Do Y");
+
+    resultListIcon.className = 'icon-img'
+    resultListIcon.src = `http://openweathermap.org/img/wn/${icon}@2x.png`  
+    resultIcon.append(resultListIcon)
     //ADD IN ICON AFTER THE DATE
     
     resultListTemp.textContent = "Temp: " + temp + "°C";
@@ -188,13 +194,15 @@ const createFiveDayResults = data => {
         dailyWind = dailyData[i].wind_speed
         dailyHumidity = dailyData[i].humidity
         dailyUnix = dailyData[i].dt
-        printCardFiveDay(dailyUnix, dailyTemp, dailyWind, dailyHumidity)
+        dailyIcon = dailyData[i].weather[0].icon
+        console.log(dailyIcon)
+        printCardFiveDay(dailyUnix, dailyTemp, dailyWind, dailyHumidity, dailyIcon)
     }
 }
 
 
 // FUNCTION THAT PRINTS OUT CARDS OF THE FIVE DAYS WITH INFORMATION ON THEM
-const printCardFiveDay = (unix, temp, wind, humidity) => {
+const printCardFiveDay = (unix, temp, wind, humidity, icon) => {
     
     var card = document.createElement('div')
     card.className = 'future-card'
@@ -206,7 +214,10 @@ const printCardFiveDay = (unix, temp, wind, humidity) => {
     cardDate.textContent = dateUnix
     card.append(cardDate)
 
-    // ADD IN LOGO
+    var cardIcon = document.createElement('img')
+    cardIcon.className = 'icon-img'
+    cardIcon.src = `http://openweathermap.org/img/wn/${icon}@2x.png` 
+    card.append(cardIcon)
 
     var cardTemp = document.createElement('p')
     cardTemp.textContent = 'Temp: ' + temp + '°C'
