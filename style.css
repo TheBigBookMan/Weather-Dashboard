@@ -156,7 +156,9 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    width: 200px;
     color: #fff;
     background: var(--primary-color);
     border: purple solid 3px;
+    border-radius: 5px;
 }

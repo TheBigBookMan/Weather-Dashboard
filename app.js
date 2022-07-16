@@ -20,9 +20,6 @@ var dateTime;
 var dateUnix;
 var futureCards = document.querySelector('.future-day-cards')
 
-
-
-
 // EVENT LISTENER FOR THE SEARCH BAR LINKED TO THE SUBMIT BUTTON
 // NEED TO INPUT THE FUNCTION NAME AND PASS THE PARAMETER FROM THE SEARCH-CITY VALUE
 submitBtn.addEventListener('click', event =>{
@@ -33,7 +30,6 @@ submitBtn.addEventListener('click', event =>{
         return;
     }
     urlGeoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=3&appid=d9b9bc1832593b46ab69e998211f9b08`;
-    console.log(urlGeoCode)
     getApiLatLon(input);
 });
 
@@ -46,6 +42,7 @@ const createHistoryList = (input) => {
     newLiButton.className = "search-history-item"
     historyList.appendChild(newLi);
     newLiButton.textContent = input
+    createBtnEvent(input)
 }
 
 // Initialization function that creates the history section on refresh page
@@ -68,14 +65,25 @@ const init = () => {
 };
 
 // ADD EVENT LISTENER TO THE HISTORY LIST BUTTONS SO THEY CALL THE API FUNCTION TO GET THE INFORMATION
+const createBtnEvent = (input) => {
+    newLiButton.addEventListener('click', event => {
+        event.preventDefault()
+        console.log(input)
+        urlGeoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=3&appid=d9b9bc1832593b46ab69e998211f9b08`;
+        getApiLatLon(input)
+    })
+}
 
 
+// PUT IF ELSE STATEMENT BEFORE THE CREATEHISTORY TO CHECK IF ITS ALREADY IN HISTORY SECTION TO STOP IT FROM CREATING ANOTHER BUTTON
 // FUNCTION TO SET ITEM TO LOCAL STORAGE AND THEN GET HISTORY FUNCTION
 const storeLocally = input => {
     if (savedStorage === null) {
         savedStorage = [input]
         localStorage.setItem("inputCityArray", JSON.stringify(savedStorage));
         createHistoryList(input)
+        return;
+    } else if (savedStorage.includes(input)) {
         return;
     } else {
         savedStorage.push(input);
@@ -109,7 +117,6 @@ const getApiLatLon = input => { // HAVE ARGUMENT AS cityChosen
 
 const getApiWeather = (lat, lon, input) => {
     urlWeather = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=cb187059a60a4d1624b2d6be95ebcdf1`
-    console.log(urlWeather)
     fetch(urlWeather)
         .then(function(response) {
             console.log(response)
@@ -120,7 +127,6 @@ const getApiWeather = (lat, lon, input) => {
             var currentWind = data.current.wind_speed
             var currentHumidity = data.current.humidity
             var currentUvi = data.current.uvi
-            console.log(data)
             currentDayResult(currentTemp, currentWind, currentHumidity, currentUvi, input)
             createFiveDayResults(data)
         })
@@ -176,7 +182,8 @@ const createFiveDayResults = data => {
     var dailyWind;
     var dailyHumidity;
     var dailyUnix;
-    for (var i = 0; i < 5; i++) {
+    futureCards.textContent = ''
+    for (var i = 1; i < 6; i++) {
         dailyTemp = dailyData[i].temp.day
         dailyWind = dailyData[i].wind_speed
         dailyHumidity = dailyData[i].humidity
@@ -185,16 +192,14 @@ const createFiveDayResults = data => {
     }
 }
 
+
 // FUNCTION THAT PRINTS OUT CARDS OF THE FIVE DAYS WITH INFORMATION ON THEM
 const printCardFiveDay = (unix, temp, wind, humidity) => {
-    console.log(unix)
-    console.log(temp)
-    console.log(wind)
-    console.log(humidity)
-
+    
     var card = document.createElement('div')
     card.className = 'future-card'
     futureCards.append(card)
+    
 
     var cardDate = document.createElement('h3')
     dateUnix = moment.unix(unix).format("DD/MM/Y")
