@@ -27,6 +27,7 @@ main {
     flex-direction: column;
 }
 
+/* Aside section search*/
 .search-container {
     display: flex;
     flex-direction: column;
@@ -45,6 +46,7 @@ main {
     margin-bottom: 3px;
 }
 
+/* Aside section submit button */
 #submit-btn {
     margin-top: 5px;
     width: 100%;
@@ -62,6 +64,7 @@ main {
     color: var(--secondary-color);
 }
 
+/* Aside section search history*/
 .search-history {
     height: 100%;    
 }
@@ -134,7 +137,7 @@ main {
     padding-left: 10px;
 }
 
-/* Result for future */
+/* Result for future days */
 .search-result-future {
     position: relative;
 }
@@ -144,7 +147,6 @@ main {
     justify-content: space-around;
 }
 
-/*INPUT THE STYLE AND WHATNOT FOR EACH CLASS WHEN IT GETS MADE THROUGH THE JAVASCRIPT*/
 .future-card {
     display: flex;
     flex-direction: column;
