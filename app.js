@@ -17,6 +17,8 @@ var resultDate = document.getElementById('result-city-date')
 var resultIcon = document.getElementById('result-city-icon')
 var resultList = document.querySelector('.result-city-info-list')
 var dateTime;
+var dateUnix;
+var futureCards = document.querySelector('.future-day-cards')
 
 
 
@@ -119,12 +121,8 @@ const getApiWeather = (lat, lon, input) => {
             var currentHumidity = data.current.humidity
             var currentUvi = data.current.uvi
             console.log(data)
-            console.log(currentTemp)
-            console.log(currentWind)
-            console.log(currentHumidity)
-            console.log(currentUvi)
-            console.log(input)
             currentDayResult(currentTemp, currentWind, currentHumidity, currentUvi, input)
+            createFiveDayResults(data)
         })
         return;
 }
@@ -140,6 +138,7 @@ const currentDayResult = (temp, wind, humidity, uvi, input) => {
     resultTitle.textContent = input + "-"
     dateTime = moment();
     resultDate.textContent = dateTime.format("dddd, MMMM Do Y");
+    //ADD IN ICON AFTER THE DATE
     
     resultListTemp.textContent = "Temp: " + temp + "°C";
     resultList.append(resultListTemp)
@@ -168,6 +167,54 @@ const currentDayResult = (temp, wind, humidity, uvi, input) => {
     return;
 }
 
+// FUNCTION THAT USES THE API DATA FOR THE NEXT FIVE DAYS 
+const createFiveDayResults = data => {
+    console.log(data)
+    var dailyData = data.daily 
+    console.log(dailyData)
+    var dailyTemp;
+    var dailyWind;
+    var dailyHumidity;
+    var dailyUnix;
+    for (var i = 0; i < 5; i++) {
+        dailyTemp = dailyData[i].temp.day
+        dailyWind = dailyData[i].wind_speed
+        dailyHumidity = dailyData[i].humidity
+        dailyUnix = dailyData[i].dt
+        printCardFiveDay(dailyUnix, dailyTemp, dailyWind, dailyHumidity)
+    }
+}
+
+// FUNCTION THAT PRINTS OUT CARDS OF THE FIVE DAYS WITH INFORMATION ON THEM
+const printCardFiveDay = (unix, temp, wind, humidity) => {
+    console.log(unix)
+    console.log(temp)
+    console.log(wind)
+    console.log(humidity)
+
+    var card = document.createElement('div')
+    card.className = 'future-card'
+    futureCards.append(card)
+
+    var cardDate = document.createElement('h3')
+    dateUnix = moment.unix(unix).format("DD/MM/Y")
+    cardDate.textContent = dateUnix
+    card.append(cardDate)
+
+    // ADD IN LOGO
+
+    var cardTemp = document.createElement('p')
+    cardTemp.textContent = 'Temp: ' + temp + '°C'
+    card.append(cardTemp)
+
+    var cardWind = document.createElement('p')
+    cardWind.textContent = 'Wind: ' + wind + ' km/h'
+    card.append(cardWind)
+
+    var cardHumidity = document.createElement('p')
+    cardHumidity.textContent = 'Humidity: ' + humidity + '%'
+    card.append(cardHumidity)
+}
 
 
 
@@ -177,9 +224,9 @@ const currentDayResult = (temp, wind, humidity, uvi, input) => {
 
 // FUNCTION THAT USES THE API DATA TO INPRINT OUT THE DAY WEATHER AND IT"S CHARACTERSITICS
 
-// FUNCTION THAT USES THE API DATA FOR THE NEXT FIVE DAYS 
 
 
 
-// FUNCTION THAT PRINTS OUT CARDS OF THE FIVE DAYS WITH INFORMATION ON THEM
+
+
 init()

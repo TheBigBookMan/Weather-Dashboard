@@ -147,12 +147,16 @@ main {
 
 .future-day-cards {
     border: solid green 2px;
+    display: flex;
+    justify-content: space-around;
 }
 
 /*INPUT THE STYLE AND WHATNOT FOR EACH CLASS WHEN IT GETS MADE THROUGH THE JAVASCRIPT*/
 .future-card {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     color: #fff;
     background: var(--primary-color);
+    border: purple solid 3px;
 }
