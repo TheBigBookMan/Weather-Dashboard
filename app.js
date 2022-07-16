@@ -67,7 +67,7 @@ const init = () => {
 const createBtnEvent = (input) => {
     newLiButton.addEventListener('click', event => {
         event.preventDefault();
-        urlGeoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=3&appid=d9b9bc1832593b46ab69e998211f9b08`;
+        urlGeoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=3&appid=36152fcc0ae44d6202fb3b8144f7dc20`;
         getApiLatLon(input);
     });
 };
