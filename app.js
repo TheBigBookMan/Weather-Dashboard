@@ -29,7 +29,7 @@ submitBtn.addEventListener('click', event =>{
         alert("Please enter a valid city.");
         return;
     };
-    urlGeoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=3&appid=d9b9bc1832593b46ab69e998211f9b08`;
+    urlGeoCode = `https://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=3&appid=d9b9bc1832593b46ab69e998211f9b08`;
     getApiLatLon(input);
 });
 
@@ -67,7 +67,7 @@ const init = () => {
 const createBtnEvent = (input) => {
     newLiButton.addEventListener('click', event => {
         event.preventDefault();
-        urlGeoCode = `http://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=3&appid=36152fcc0ae44d6202fb3b8144f7dc20`;
+        urlGeoCode = `https://api.openweathermap.org/geo/1.0/direct?q=${input}&limit=3&appid=36152fcc0ae44d6202fb3b8144f7dc20`;
         getApiLatLon(input);
     });
 };
@@ -108,7 +108,7 @@ const getApiLatLon = input => {
 
 // Function that takes in the latitude, longitude and input city name and fetches the one call API, which then returns the information about the weather for current day
 const getApiWeather = (lat, lon, input) => {
-    urlWeather = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=cb187059a60a4d1624b2d6be95ebcdf1`;
+    urlWeather = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=metric&appid=cb187059a60a4d1624b2d6be95ebcdf1`;
     fetch(urlWeather)
         .then(function(response) {
             return response.json();
@@ -139,7 +139,7 @@ const currentDayResult = (temp, wind, humidity, uvi, input, icon) => {
     resultDate.textContent = dateTime.format("dddd, MMMM Do Y");
 
     resultListIcon.className = 'icon-img';
-    resultListIcon.src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+    resultListIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
     resultIcon.append(resultListIcon);
     
     resultListTemp.textContent = "Temp: " + temp + "°C";
@@ -201,7 +201,7 @@ const printCardFiveDay = (unix, temp, wind, humidity, icon) => {
 
     var cardIcon = document.createElement('img');
     cardIcon.className = 'icon-img';
-    cardIcon.src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+    cardIcon.src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
     card.append(cardIcon);
 
     var cardTemp = document.createElement('p');
